@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getCourseById, downloadCoursePDF } from '../services/api';
+import { getCourseById } from '../services/api';
 import DOMPurify from 'dompurify';
 import './CourseDetailPage.css';
 
@@ -25,17 +25,6 @@ const CourseDetailPage = () => {
     };
     fetchCourse();
   }, [id]);
-
-  const handleDownloadPDF = async () => {
-    try {
-      if (course.pdfUrl) {
-        window.open(course.pdfUrl, '_blank');
-      }
-    } catch (error) {
-      console.error('Error downloading PDF:', error);
-      alert('Failed to download PDF');
-    }
-  };
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
@@ -80,15 +69,6 @@ const CourseDetailPage = () => {
       <div className="course-content">
         <div className="course-info">
           <p className="course-description">{course.description}</p>
-          
-          {course.pdfUrl && (
-            <button 
-              onClick={handleDownloadPDF}
-              className="download-pdf-button"
-            >
-              Download Course PDF
-            </button>
-          )}
         </div>
 
         <div 
@@ -100,4 +80,4 @@ const CourseDetailPage = () => {
   );
 };
 
-export default CourseDetailPage; 
+export default CourseDetailPage;
