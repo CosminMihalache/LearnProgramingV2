@@ -9,6 +9,7 @@ const app = express();
 // Middleware
 app.use(cors({
   origin: [
+    'https://learn-programing-v2.vercel.app',
     'https://learn-programing-v2-wd5a.vercel.app',
     'http://localhost:3000'
   ],
