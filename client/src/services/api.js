@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_URL = process.env.NODE_ENV === 'production'
-  ? 'https://learn-programing-v2-wd5a.vercel.app/api'
+  ? 'https://learnprogramingv2-1.onrender.com/api'
   : 'http://localhost:5001/api';
 
 const api = axios.create({
