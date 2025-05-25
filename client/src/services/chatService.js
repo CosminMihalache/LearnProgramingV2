@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_URL = process.env.NODE_ENV === 'production'
-  ? '/api' // In production, use relative URL for Vercel deployment
+  ? 'https://newfolder-7mxe.onrender.com/api'
   : 'http://localhost:5001/api';
 
 export const sendMessage = async (message) => {
@@ -12,4 +12,4 @@ export const sendMessage = async (message) => {
     console.error('Error sending message:', error);
     throw error;
   }
-};
+}; 

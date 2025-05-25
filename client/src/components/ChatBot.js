@@ -8,7 +8,7 @@ const ChatBot = () => {
   const [currentMessage, setCurrentMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
-  const [setHasInteracted] = useState(false); // Changed to unused setter function
+  const [hasInteracted, setHasInteracted] = useState(false);
   const [audioLoaded, setAudioLoaded] = useState(false);
   const notificationSound = useRef(null);
   const messagesEndRef = useRef(null);
@@ -52,7 +52,7 @@ const ChatBot = () => {
         notificationSound.current.removeEventListener('canplaythrough', handleCanPlayThrough);
       }
     };
-  }, [audioLoaded]); // Added audioLoaded to dependency array
+  }, []);
 
   const toggleChat = () => {
     setHasInteracted(true);
@@ -141,4 +141,4 @@ const ChatBot = () => {
   );
 };
 
-export default ChatBot;
+export default ChatBot; 
