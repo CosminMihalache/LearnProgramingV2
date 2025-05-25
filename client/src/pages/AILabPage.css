@@ -1,0 +1,154 @@
+.ailab-page {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.ailab-hero {
+  background: linear-gradient(to right, #051937, #004d7a);
+  color: white;
+  padding: 5rem 2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.ailab-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.ailab-hero p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+.ailab-section {
+  padding: 4rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.ailab-section h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  font-size: 2rem;
+}
+
+.ailab-section h2:after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #004d7a;
+  margin: 1rem auto;
+}
+
+.research-areas, .projects-grid, .collaboration-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.research-card, .project-item, .collab-card {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.research-card:hover, .project-item:hover, .collab-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.research-card h3, .project-item h3, .collab-card h3 {
+  color: #004d7a;
+  margin-bottom: 1rem;
+}
+
+.research-card ul {
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+}
+
+.research-card li {
+  margin-bottom: 0.5rem;
+}
+
+.dark {
+  background-color: #f0f4f8;
+}
+
+.project-status {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #e0f7fa;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.collab-button {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  background: #004d7a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.collab-button:hover {
+  background: #003357;
+}
+
+.vision {
+  text-align: center;
+  background: #f8f9fa;
+  padding: 5rem 2rem;
+}
+
+.vision blockquote {
+  font-size: 1.5rem;
+  font-style: italic;
+  max-width: 800px;
+  margin: 2rem auto;
+  color: #004d7a;
+  border-left: 4px solid #004d7a;
+  padding-left: 2rem;
+}
+
+.vision p {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .ailab-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .ailab-hero p {
+    font-size: 1rem;
+  }
+  
+  .research-areas, .projects-grid, .collaboration-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .ailab-section {
+    padding: 3rem 1.5rem;
+  }
+  
+  .vision blockquote {
+    font-size: 1.2rem;
+    padding-left: 1rem;
+  }
+}

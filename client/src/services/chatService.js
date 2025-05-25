@@ -1,0 +1,15 @@
+import axios from 'axios';
+
+const API_URL = process.env.NODE_ENV === 'production'
+  ? '/api' // In production, use relative URL for Vercel deployment
+  : 'http://localhost:5001/api';
+
+export const sendMessage = async (message) => {
+  try {
+    const response = await axios.post(`${API_URL}/chat`, { message });
+    return response.data;
+  } catch (error) {
+    console.error('Error sending message:', error);
+    throw error;
+  }
+};
