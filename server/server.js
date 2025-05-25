@@ -10,8 +10,7 @@ const app = express();
 app.use(cors({
   origin: [
     'https://newfolder-7mxe.onrender.com',
-    'http://localhost:3000',
-    /\.vercel\.app$/
+    'http://localhost:3000'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type'],
@@ -51,12 +50,8 @@ if (!mongoURI) {
   // process.exit(1);
 }
 else {
-  // MongoDB connection with serverless optimization
-  mongoose.connect(mongoURI, {
-    ...mongooseOptions,
-    bufferCommands: false, // Disable mongoose buffering
-    autoCreate: false,     // Don't create collections automatically
-  })
+  // MongoDB connection
+  mongoose.connect(mongoURI, mongooseOptions)
     .then(() => console.log('MongoDB connected successfully'))
     .catch(err => {
       console.error('MongoDB connection error:', {
@@ -92,4 +87,4 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); 
