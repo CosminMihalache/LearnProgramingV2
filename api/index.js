@@ -55,6 +55,16 @@ app.use('/api/chat', chatRouter);
 // Static files
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
+// Add a test route to diagnose 404 issues
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'API is working correctly' });
+});
+
+// Add a catch-all route for API requests
+app.all('/api/*', (req, res) => {
+  res.status(404).json({ error: 'API endpoint not found' });
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Error:', err);
@@ -64,5 +74,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Export the express app as a serverless function
-module.exports = app;
+// Export as a serverless function handler instead of just the Express app
+module.exports = (req, res) => {
+  // This ensures Express can handle Vercel serverless function requests
+  return app(req, res);
+};
