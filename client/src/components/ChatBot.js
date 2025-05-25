@@ -8,10 +8,10 @@ const ChatBot = () => {
   const [currentMessage, setCurrentMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
-  const [hasInteracted, setHasInteracted] = useState(false);
   const [audioLoaded, setAudioLoaded] = useState(false);
   const notificationSound = useRef(null);
   const messagesEndRef = useRef(null);
+  const initialSoundPlayed = useRef(false); // Ref to track if initial sound has played
 
   useEffect(() => {
     // Initialize audio with preload
@@ -27,19 +27,17 @@ const ChatBot = () => {
     notificationSound.current.addEventListener('canplaythrough', handleCanPlayThrough);
     notificationSound.current.load();
 
-    // Send initial greeting with sound
+    // Send initial greeting
     const sendInitialGreeting = async () => {
       setIsTyping(true);
       try {
         const response = await sendMessage('Hello! I am your virtual assistant. How can I help you today?');
         setMessages([{ text: response.message, sender: 'bot' }]);
         setUnreadCount(1);
-        // Play sound only once for initial greeting
-        if (audioLoaded && notificationSound.current) {
-          notificationSound.current.play().catch(console.error);
-        }
+        // Sound playing logic moved to another useEffect
       } catch (error) {
         console.error('Error sending initial greeting:', error);
+        setMessages(prev => [...prev, { text: 'Failed to connect to the assistant. Please try again later.', sender: 'bot' }]);
       } finally {
         setIsTyping(false);
       }
@@ -52,10 +50,17 @@ const ChatBot = () => {
         notificationSound.current.removeEventListener('canplaythrough', handleCanPlayThrough);
       }
     };
-  }, []);
+  }, []); // This effect runs once on mount
+
+  // Effect to play sound for the initial bot message
+  useEffect(() => {
+    if (messages.length > 0 && messages[0].sender === 'bot' && audioLoaded && notificationSound.current && !initialSoundPlayed.current) {
+      notificationSound.current.play().catch(error => console.error("Error playing notification sound:", error));
+      initialSoundPlayed.current = true;
+    }
+  }, [messages, audioLoaded]); // Dependencies: messages and audioLoaded
 
   const toggleChat = () => {
-    setHasInteracted(true);
     setIsOpen(!isOpen);
     if (!isOpen) {
       setUnreadCount(0);
@@ -76,6 +81,10 @@ const ChatBot = () => {
       setMessages(prev => [...prev, { text: response.message, sender: 'bot' }]);
       if (!isOpen) {
         setUnreadCount(prev => prev + 1);
+        // Play sound for subsequent bot messages if chat is closed and audio is loaded
+        if (audioLoaded && notificationSound.current) {
+          notificationSound.current.play().catch(error => console.error("Error playing notification sound:", error));
+        }
       }
     } catch (error) {
       console.error('Error sending message:', error);
@@ -141,4 +150,4 @@ const ChatBot = () => {
   );
 };
 
-export default ChatBot; 
+export default ChatBot;
