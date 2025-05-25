@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.NODE_ENV === 'production'
-  ? 'https://learnprogramingv2-1.onrender.com/api'
-  : 'http://localhost:5001/api';
+const API_URL = 'https://learnprogramingv2-1.onrender.com/api';
 
 const api = axios.create({
   baseURL: API_URL,
